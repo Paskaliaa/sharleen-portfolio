@@ -1,0 +1,26 @@
+.hero { padding-block: 24px; display: grid; grid-template-columns: 1.55fr 1fr; align-items: center; gap: clamp(28px, 6vw, 80px); }
+.label { color: var(--muted); font-size: .76rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+.headline, .lede { font-family: var(--handwriting-font); font-weight: 400; }
+.headline { margin-block: 16px 20px; font-size: clamp(1.8rem, 3.6vw, 3.15rem); line-height: 1.22; text-wrap: pretty; }
+.headline mark { padding-inline: .12em; border-radius: .14em; background: #f0d6fa; color: #4c1d61; }
+.chapter p, .experienceRow dd { color: var(--muted); line-height: 1.65; }
+.lede { font-size: clamp(1.2rem, 2.3vw, 1.65rem); line-height: 1.5; }
+.photo, .portrait { margin: 0; min-width: 0; }
+.photoSlot { position: relative; aspect-ratio: 5 / 4; overflow: hidden; border: 1px solid var(--rule); border-radius: 16px; }
+.portrait .photoSlot { aspect-ratio: 4 / 5; }
+.photoSlot img { object-fit: cover; }
+.experience { padding-block: 24px; }
+.chapter { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(24px, 6vw, 72px); padding-block: clamp(30px, 6vw, 66px); border-bottom: 1px solid var(--rule); }
+.chapter:nth-of-type(odd) .photo { grid-column: 1; grid-row: 1; }
+.chapter h2 { font-weight: 700; font-size: clamp(1.55rem, 3vw, 2.35rem); line-height: 1.05; letter-spacing: -.04em; }
+.chapter p { margin-top: 14px; }
+.experienceRow { display: grid; grid-template-columns: 1fr 1.2fr; gap: 14px 30px; padding-block: 19px; border-bottom: 1px solid var(--rule); }
+.experienceRow dt { font-weight: 700; }
+.experienceRow dt span { display: block; color: var(--muted); font-size: .88rem; font-weight: 400; margin-top: 4px; }
+.footer { display: flex; flex-wrap: wrap; gap: 24px; padding-block: 12px 42px; font-size: .9rem; }
+.footer a { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 700px) {
+  .hero, .chapter, .experienceRow { grid-template-columns: minmax(0, 1fr); }
+  .portrait .photoSlot { aspect-ratio: 5 / 4; }
+  .chapter:nth-of-type(odd) .photo { grid-column: auto; grid-row: auto; }
+}
