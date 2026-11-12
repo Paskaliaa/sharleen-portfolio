@@ -1,58 +1,96 @@
-# Sharleen Paskalia portfolio
+# Sharleen Paskalia’s portfolio
 
-Run `npm install` and `npm run dev`, then open http://localhost:3000.
+Sharleen Paskalia is a founder and educator working in education, entrepreneurship, and innovation. This portfolio brings together her work in venture building, AI education, people development, and research.
 
-## Add the homepage portrait
+| Page | What you’ll find |
+| --- | --- |
+| **Work** | Selected projects from Careers Lingo, Alliance High School, the Sustainable World Corporation Summit, Soma Siri Afrika, and STEM Impact Center |
+| **About Me** | Sharleen’s story, selected experience, education, and certifications |
+| **Research** | Six research projects, including a case study on Kenya’s Presidential Working Party on Education Reforms |
+| **Resume** | A searchable experience library, tailored CVs with PDF download, and an assistant that answers questions about Sharleen’s work |
 
-1. Save the image under `public/images/`, for example `public/images/sharleen.webp`.
-2. Add `portrait: { src: "/images/sharleen.webp", alt: "Portrait of Sharleen Paskalia" }` to `src/data/profile.ts`.
-3. For the reference treatment, prepare a transparent grayscale cutout with a white outline. The site supplies the lime background. The portrait keeps its 5:4 slot on desktop and mobile.
+## Run locally
 
-## Add project images
+Install Node.js 20.9 or newer. From the project folder, run:
 
-Save photos under `public/images/`. Add an `image` entry to the matching project in `src/data/work.ts`:
+```sh
+npm ci
+npm run dev
+```
+
+Open [the local preview](http://localhost:3000). On Windows, use `npm.cmd` if PowerShell blocks `npm`.
+
+To check changes before pushing:
+
+```sh
+npm run lint
+npm run typecheck
+npm run build
+```
+
+The app uses Next.js App Router, TypeScript, and Tailwind CSS.
+
+## Configure the Resume assistant
+
+Create `.env.local` from [the environment example](.env.example) and fill in the two values:
+
+```dotenv
+OPENAI_API_KEY=
+OPENAI_MODEL=gpt-5-mini
+```
+
+Paste your OpenAI API key after the first equals sign, then restart the development server. Keep the key in `.env.local`, which Git ignores. On Vercel, add the same values in the project’s environment settings.
+
+The Resume form accepts up to 500 words for a CV brief and 100 words per chat question. With OpenAI configured, the server sends the visitor’s input and relevant portfolio context to the OpenAI Responses API. The app requests that OpenAI skip response storage. The app keeps chat history in the current page session. Without AI configuration, the experience library and keyword-matched CV drafts are still available. The PDF export works with both kinds of CV drafts.
+
+## Update content
+
+| To change | Edit |
+| --- | --- |
+| Homepage introduction and interests | [src/app/page.tsx](src/app/page.tsx) |
+| Homepage portrait and profile links | [src/data/profile.ts](src/data/profile.ts) |
+| Featured projects, case studies, and founder development | [src/data/work.ts](src/data/work.ts) |
+| About Me chapters, photos, and credentials | [src/data/journey.ts](src/data/journey.ts) |
+| Research table and education reforms case study | [src/data/research.ts](src/data/research.ts) |
+| Resume assistant’s evidence library | [src/data/experience.ts](src/data/experience.ts) |
+
+The Resume evidence library draws from the Work and Research data. Update those files when a role, project result, or research contribution changes.
+
+### Add photos or video
+
+Save photos under `public/images/`. For a Work card, add an `image` entry to the matching project in `src/data/work.ts`. The card uses a portrait frame. Use `fit: "contain"` to show the whole image inside the frame.
 
 ```ts
 image: {
-  src: "/images/workshop.webp",
+  src: "/images/work/workshop.webp",
   alt: "Learners testing a robot during a workshop",
-  caption: "Robotics workshop",
+  fit: "contain",
 },
 ```
 
-The photo replaces the placeholder at the top of the project card. Use descriptive alt text for informative photos. Optionally add `position`, such as `"center top"`, to adjust the crop. Replace a photo by changing its path.
+For About Me, use `aboutIntroPhoto` and the chapters’ `photo` entries in `src/data/journey.ts`. Set descriptive alt text and add a caption or crop position where helpful.
 
-Set any additional contact links in `src/data/profile.ts`.
-
-## Add a project video
-
-Save an MP4 or WebM file under `public/videos/`. Add a `videos` array to the relevant project in `src/data/work.ts`:
+Save MP4 or WebM clips under `public/videos/` and add them to the project’s `videos` array. Use a `poster` image and WebVTT captions when available.
 
 ```ts
 videos: [{
-  title: "Careers Lingo founder introduction",
-  src: "/videos/careers-lingo-intro.mp4",
-  poster: "/images/careers-lingo-intro.webp",
-  captions: { src: "/videos/careers-lingo-intro.vtt", language: "en", label: "English" },
+  title: "Pitch festival highlights",
+  src: "/videos/pitch-festival.mp4",
+  poster: "/images/work/pitch-festival.webp",
+  captions: {
+    src: "/videos/pitch-festival.vtt",
+    language: "en",
+    label: "English",
+  },
 }],
 ```
 
-Poster and caption files are optional. Videos play on demand in the case study and pause when it closes.
+## Deploy to Vercel
 
-## Add Zanzibar photos to About Me
+1. Push your changes to the [GitHub repository](https://github.com/Paskaliaa/sharleen-portfolio).
+2. In [Vercel](https://vercel.com/new), import `Paskaliaa/sharleen-portfolio`. Select the **Next.js** preset and keep the repository root and default build settings.
+3. Add `OPENAI_API_KEY` and `OPENAI_MODEL` under **Environment Variables** for **Production**. Click **Deploy**. If you add the variables after deploying, redeploy to apply them.
+4. Open the generated `.vercel.app` address and test both Resume tools.
+5. In **Settings → Domains**, add `paskalia.life`. Enter the DNS records Vercel displays at your domain provider, then check the site over HTTPS once Vercel verifies the domain.
 
-Save the photos under `public/images/about/`. In `src/data/journey.ts`, set `aboutIntroPhoto` for the opening image and update the `photo` entry for each chapter. Use the same `src`, `alt`, and optional `caption` and `position` fields as project images.
-
-## Resume tools and AI connection
-
-The Resume header link opens /resume. The experience library works without external services. The tailoring and chat features use a server-side OpenAI Responses endpoint.
-
-1. Copy .env.example to .env.local.
-2. Set OPENAI_API_KEY and OPENAI_MODEL using a model available to your project that supports Structured Outputs.
-3. Restart npm run dev.
-
-The API key stays on the server. Visitors submit their brief or question to OpenAI along with the curated professional history in src/data/experience.ts and the current chat context. Response storage is disabled in the API request. The app does not persist visitor conversations. Refreshing clears the browser conversation.
-
-Update src/data/experience.ts to extend or correct the evidence. Portfolio project edits feed into it automatically. Source descriptions identify the underlying CV, report, or personal account. Conflicting CV dates and proficiency claims are marked for confirmation. The assistant cites evidence IDs and is instructed to preserve those uncertainties.
-
-Tailored drafts can be downloaded as a formatted PDF with evidence references. Until the AI connection is configured, CV drafts use local keyword matching and experience chat displays a connection message.
+[Vercel GitHub import](https://vercel.com/docs/git/vercel-for-github) · [Environment variables](https://vercel.com/docs/environment-variables) · [Custom domains](https://vercel.com/docs/domains/set-up-custom-domain)

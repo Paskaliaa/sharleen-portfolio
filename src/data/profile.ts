@@ -5,7 +5,7 @@ type Profile = {
   portrait?: PortfolioImage;
   linkedin: string;
   resume?: string;
-  email?: string;
+  email: string;
   github?: string;
   x?: string;
 };
@@ -17,4 +17,5 @@ export const profile: Profile = {
     alt: "Portrait of Sharleen Paskalia",
   },
   linkedin: "https://www.linkedin.com/in/sharleen-paskalia-6398a51ab/",
+  email: "paskalia@qhazi.com",
 };

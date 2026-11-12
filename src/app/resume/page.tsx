@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "../../components/Header";
 import { ResumeStudio } from "../../components/ResumeStudio";
 import { experienceRecords } from "../../data/experience";
+import { profile } from "../../data/profile";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default function ResumePage() {
       <ResumeStudio enabled={enabled} records={experienceRecords} />
       <section className="resume-contact" aria-labelledby="resume-contact-title">
         <h2 id="resume-contact-title">Contact me</h2>
-        <a href="mailto:paskalia@qhazi.com">paskalia@qhazi.com</a>
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
       </section>
     </main>
   </>;

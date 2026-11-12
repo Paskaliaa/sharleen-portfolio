@@ -72,6 +72,7 @@ export default function AboutPage() {
       </main>
       <footer className={styles.footer}>
         <Link href="/">View selected work</Link>
+        <a href={`mailto:${profile.email}`}>{profile.email}</a>
         <a href={profile.linkedin}>LinkedIn</a>
         <Link href="/resume">Resume</Link>
       </footer>

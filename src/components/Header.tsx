@@ -15,8 +15,8 @@ export function Header({ currentPage = "work" }: { currentPage?: "work" | "about
       <Link href="/research" aria-current={currentPage === "research" ? "page" : undefined}>Research</Link>
     </nav>
     <div className={styles.links}>
-      <a href={profile.linkedin}>LinkedIn <ArrowUpRight size={18} aria-hidden /></a>
-      <Link href="/resume" aria-current={currentPage === "resume" ? "page" : undefined}>Resume <ArrowUpRight size={18} aria-hidden /></Link>
+      <a href={profile.linkedin}>LinkedIn <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden /></a>
+      <Link href="/resume" aria-current={currentPage === "resume" ? "page" : undefined}>Resume <ArrowUpRight size={16} strokeWidth={1.5} aria-hidden /></Link>
     </div>
   </header>;
 }

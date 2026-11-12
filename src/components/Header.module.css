@@ -16,9 +16,9 @@
 .switcher a { position: relative; display: grid; place-items: center; min-width: 100px; min-height: 46px; border-radius: 999px; color: var(--accent); font-weight: 700; }
 .switcher a:hover, .switcher a[aria-current="page"] { background: var(--accent-hover); }
 .switcher a[aria-current="page"]::before { content: ""; position: absolute; left: 50%; top: -9px; translate: -50%; width: 30px; height: 2px; border-radius: 4px; background: var(--accent); }
-.links { display: flex; justify-content: flex-end; gap: clamp(6px, 1.4vw, 22px); font-weight: 700; }
-.links a { display: inline-flex; gap: 5px; align-items: center; padding: 7px 10px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); }
-.links a:hover, .links a[aria-current="page"] { background: var(--accent-hover); }
+.links { display: flex; justify-content: flex-end; gap: clamp(6px, 1.4vw, 22px); font-weight: 400; }
+.links a { display: inline-flex; align-items: center; gap: 5px; padding-block: 7px; color: var(--muted); }
+.links a:hover, .links a[aria-current="page"] { text-decoration: underline; text-underline-offset: 4px; }
 @media (max-width: 700px) {
   .header { grid-template-columns: minmax(0, 1fr) auto; gap: 16px 12px; padding-block: 20px; }
   .switcher { grid-column: 1 / -1; grid-row: 2; justify-self: center; }
